@@ -1,4 +1,6 @@
 filepath: ""
+values:
+- jx-values.yaml
 environments:
   default:
     values:
@@ -45,9 +47,9 @@ releases:
   - ../../versionStream/charts/stable/chartmuseum/values.yaml.gotmpl
   - jx-values.yaml
 - chart: jxgh/local-external-secrets
-version: 0.0.14
-name: local-external-secrets
-values:
-- jx-values.yaml
+  version: 0.0.14
+  name: local-external-secrets
+  values:
+  - jx-values.yaml
 templates: {}
 renderedvalues: {}

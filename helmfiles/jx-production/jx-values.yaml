@@ -3,7 +3,8 @@
 # This file is created from the jx-requirements.yml and jx-global-values.yaml files.
 # For more information see: https://jenkins-x.io/v3/develop/apps/#using-requirements-in-charts
 jx:
-  imagePullSecrets: []
+  imagePullSecrets:
+  - tekton-container-registry-auth
   pipelineVariables: {}
   releaseCRD: true
   secrets:
@@ -20,14 +21,20 @@ jxRequirements:
     enabled: false
     schedule: ""
   cluster:
+    chartRepository: http://jenkins-x-chartmuseum.jx.svc.cluster.local:8080
+    clusterName: tf-jx-golden-turtle
     devEnvApprovers:
     - todo
     environmentGitOwner: todo
     gitKind: github
     gitName: github
     gitServer: https://github.com
+    gke:
+      projectNumber: "746866976253"
+    project: arched-backup-398010
     provider: gke
     registry: gcr.io
+    zone: us-central1-a
   environments:
   - key: dev
   - key: staging
@@ -35,14 +42,29 @@ jxRequirements:
   ingress:
     domain: change.me
     kind: ingress
-    namespaceSubDomain: -jx-production.
+    namespaceSubDomain: .
     tls:
       email: ""
       enabled: false
-      production: false
+      production: true
+  pipelineUser:
+    username: mani-bot9
   repository: nexus
   secretStorage: vault
-  vault: {}
+  storage:
+  - name: logs
+    url: gs://logs-tf-jx-golden-turtle-46567af98c07
+  - name: reports
+    url: gs://reports-tf-jx-golden-turtle-46567af98c07
+  - name: repository
+    url: gs://repository-tf-jx-golden-turtle-46567af98c07
+  terraformVault: true
+  vault:
+    bucket: vault-tf-jx-golden-turtle-46567af98c07
+    key: crypto-key-tf-jx-golden-turtle-46567af98c07
+    keyring: keyring-tf-jx-golden-turtle-46567af98c07
+    name: tf-jx-golden-turtle
+    serviceAccount: tf-jx-golden-turtle-vt
   webhook: lighthouse
 jxRequirementsIngressExternalDNS:
   enabled: false
